@@ -1,0 +1,31 @@
+local Players = game:GetService("Players")
+	local LocalPlayer = Players.LocalPlayer
+
+	-- Fonction pour créer un effet de surbrillance pour un joueur
+	local function createHighlight(player)
+		if player.Character then
+			local highlight = Instance.new("BoxHandleAdornment")
+			highlight.AlwaysOnTop = true -- Pour que l'effet reste au-dessus de tout
+			highlight.Size = player.Character:GetExtentsSize() * 1.1 -- Augmente légèrement la taille pour englober tout le personnage
+			highlight.Adornee = player.Character -- Adornee est le personnage
+			highlight.Color3 = Color3.new(1, 0, 0) -- Rouge
+			highlight.Transparency = 0.5
+			highlight.ZIndex = 5 -- Assure que l'effet est toujours au-dessus des autres objets
+			highlight.Parent = player.Character -- Parent l'effet au personnage du joueur
+		end
+	end
+
+	-- Fonction pour créer l'effet de surbrillance pour tous les joueurs
+	local function createHighlightsForAllPlayers()
+		for _, player in ipairs(Players:GetPlayers()) do
+			createHighlight(player)
+		end
+	end
+
+	-- Crée l'effet de surbrillance pour tous les joueurs déjà présents
+	createHighlightsForAllPlayers()
+
+	-- Connecte un événement pour gérer l'arrivée de nouveaux joueurs
+	Players.PlayerAdded:Connect(function(player)
+		createHighlight(player)
+	end)
