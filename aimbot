@@ -1,0 +1,112 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+local Camera = game.Workspace.CurrentCamera
+
+-- Variable pour suivre si le bouton droit de la souris est enfoncé
+local isMouseButton2Down = false
+local currentTarget = nil
+
+-- Fonction pour vérifier si un joueur est visible (pas derrière un mur)
+local function isVisible(player)
+    local origin = Camera.CFrame.Position
+    local targetPosition = player.Character.HumanoidRootPart.Position
+    local direction = (targetPosition - origin).unit
+    local distance = (targetPosition - origin).Magnitude
+    local ray = Ray.new(origin, direction * distance)
+    local part, hitPos = game.Workspace:FindPartOnRay(ray, LocalPlayer.Character)
+
+    -- Vérifier si le rayon touche directement le joueur
+    if part and part:IsDescendantOf(player.Character) then
+        return true
+    end
+    return false
+end
+
+-- Fonction pour trouver le joueur le plus proche qui est visible
+local function findNearestVisiblePlayer()
+    local nearestPlayer = nil
+    local minDistance = math.huge
+    
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local distance = (player.Character.HumanoidRootPart.Position - Camera.CFrame.Position).Magnitude
+            if distance < minDistance and isVisible(player) then
+                nearestPlayer = player
+                minDistance = distance
+            end
+        end
+    end
+    
+    return nearestPlayer
+end
+
+-- Fonction pour bloquer le viseur sur un joueur spécifié
+local function aimAtPlayer(player)
+    if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        local direction = (player.Character.HumanoidRootPart.Position - Camera.CFrame.Position).unit
+        local lookAt = CFrame.new(Camera.CFrame.Position, Camera.CFrame.Position + direction)
+        Camera.CFrame = lookAt
+    end
+end
+
+-- Fonction pour mettre à jour la direction de la caméra si le bouton droit de la souris est enfoncé
+local function updateCameraAim()
+    if isMouseButton2Down and currentTarget then
+        aimAtPlayer(currentTarget)
+    end
+end
+
+-- Créer le ScreenGui et le cercle
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+local circleFrame = Instance.new("Frame")
+circleFrame.Size = UDim2.new(0, 100, 0, 100) -- Taille du cercle (100x100)
+circleFrame.Position = UDim2.new(0.5, -50, 0.5, -50) -- Centrer sur l'écran
+circleFrame.BackgroundTransparency = 1 -- Rendre l'intérieur transparent
+circleFrame.BorderSizePixel = 0 -- Pas de bordure par défaut
+circleFrame.Visible = false -- Cacher par défaut
+circleFrame.Parent = screenGui
+
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Thickness = 3 -- Épaisseur du contour
+uiStroke.Color = Color3.new(1, 0, 0) -- Couleur du contour (rouge ici)
+uiStroke.Parent = circleFrame
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0.5, 0) -- Rayon du coin arrondi (0.5 pour un cercle parfait)
+uiCorner.Parent = circleFrame
+
+-- Fonction pour afficher le cercle
+local function showCircle()
+    circleFrame.Visible = true
+end
+
+-- Fonction pour cacher le cercle
+local function hideCircle()
+    circleFrame.Visible = false
+end
+
+-- Détecter quand le bouton droit de la souris est enfoncé
+UserInputService.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton2 then
+        isMouseButton2Down = true
+        currentTarget = findNearestVisiblePlayer() -- Trouver et mémoriser la cible initiale
+        showCircle() -- Afficher le cercle
+    end
+end)
+
+-- Détecter quand le bouton droit de la souris est relâché
+UserInputService.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton2 then
+        isMouseButton2Down = false
+        currentTarget = nil -- Réinitialiser la cible lorsqu'on arrête de viser
+        hideCircle() -- Cacher le cercle
+    end
+end)
+
+-- Mettre à jour la direction de la caméra à intervalles réguliers
+game:GetService("RunService").RenderStepped:Connect(function()
+    updateCameraAim()
+end)
