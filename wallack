@@ -1,31 +1,51 @@
 local Players = game:GetService("Players")
-	local LocalPlayer = Players.LocalPlayer
+local LocalPlayer = Players.LocalPlayer
 
-	-- Fonction pour créer un effet de surbrillance pour un joueur
-	local function createHighlight(player)
-		if player.Character then
-			local highlight = Instance.new("BoxHandleAdornment")
-			highlight.AlwaysOnTop = true -- Pour que l'effet reste au-dessus de tout
-			highlight.Size = player.Character:GetExtentsSize() * 1.1 -- Augmente légèrement la taille pour englober tout le personnage
-			highlight.Adornee = player.Character -- Adornee est le personnage
-			highlight.Color3 = Color3.new(1, 0, 0) -- Rouge
-			highlight.Transparency = 0.5
-			highlight.ZIndex = 5 -- Assure que l'effet est toujours au-dessus des autres objets
-			highlight.Parent = player.Character -- Parent l'effet au personnage du joueur
-		end
-	end
+-- Fonction pour créer un effet de surbrillance pour un joueur
+local function createHighlight(player)
+    if player.Character then
+        local highlight = Instance.new("BoxHandleAdornment")
+        highlight.AlwaysOnTop = true -- Pour que l'effet reste au-dessus de tout
+        highlight.Size = player.Character:GetExtentsSize() * 1.1 -- Augmente légèrement la taille pour englober tout le personnage
+        highlight.Adornee = player.Character -- Adornee est le personnage
+        highlight.Color3 = Color3.new(1, 0, 0) -- Rouge
+        highlight.Transparency = 0.5
+        highlight.ZIndex = 5 -- Assure que l'effet est toujours au-dessus des autres objets
+        highlight.Parent = player.Character -- Parent l'effet au personnage du joueur
+        
+        -- Créer le BillboardGui pour afficher le nom du joueur
+        local billboardGui = Instance.new("BillboardGui")
+        billboardGui.Size = UDim2.new(0, 100, 0, 50) -- Taille de la GUI
+        billboardGui.Adornee = player.Character:FindFirstChild("Head") -- Afficher la GUI au-dessus de la tête du joueur
+        billboardGui.AlwaysOnTop = true -- Pour que la GUI reste au-dessus de tout
+        billboardGui.StudsOffset = Vector3.new(0, 2, 0) -- Décalage pour afficher la GUI au-dessus de la tête
+        billboardGui.Parent = player.Character
+        
+        local textLabel = Instance.new("TextLabel")
+        textLabel.Size = UDim2.new(1, 0, 1, 0) -- Taille du texte
+        textLabel.Text = player.Name -- Nom du joueur
+        textLabel.TextColor3 = Color3.new(1, 1, 1) -- Couleur du texte
+        textLabel.BackgroundTransparency = 1 -- Transparence de l'arrière-plan
+        textLabel.Font = Enum.Font.SourceSansBold -- Police du texte
+        textLabel.Parent = billboardGui
+    else
+        player.CharacterAppearanceLoaded:Connect(function(character)
+            createHighlight(player)
+        end)
+    end
+end
 
-	-- Fonction pour créer l'effet de surbrillance pour tous les joueurs
-	local function createHighlightsForAllPlayers()
-		for _, player in ipairs(Players:GetPlayers()) do
-			createHighlight(player)
-		end
-	end
+-- Fonction pour créer l'effet de surbrillance pour tous les joueurs
+local function createHighlightsForAllPlayers()
+    for _, player in ipairs(Players:GetPlayers()) do
+        createHighlight(player)
+    end
+end
 
-	-- Crée l'effet de surbrillance pour tous les joueurs déjà présents
-	createHighlightsForAllPlayers()
+-- Crée l'effet de surbrillance pour tous les joueurs déjà présents
+createHighlightsForAllPlayers()
 
-	-- Connecte un événement pour gérer l'arrivée de nouveaux joueurs
-	Players.PlayerAdded:Connect(function(player)
-		createHighlight(player)
-	end)
+-- Connecte un événement pour gérer l'arrivée de nouveaux joueurs
+Players.PlayerAdded:Connect(function(player)
+    createHighlight(player)
+end)
