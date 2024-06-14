@@ -4,26 +4,29 @@ gui.Parent = game.Players.LocalPlayer.PlayerGui
 
 local frame = Instance.new("Frame")
 frame.Parent = gui
-frame.Size = UDim2.new(0, 250, 0, 150)
-frame.Position = UDim2.new(0.5, -125, 0.5, -75)
-frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Fond noir
 frame.BorderSizePixel = 2
 
 local textLabel = Instance.new("TextLabel")
 textLabel.Parent = frame
-textLabel.Size = UDim2.new(1, 0, 0.3, 0)
+textLabel.Size = UDim2.new(1, 0, 0.2, 0)
 textLabel.Position = UDim2.new(0, 0, 0, 0)
 textLabel.BackgroundTransparency = 1
-textLabel.Text = "Entrez 'neptune' ci-dessous:"
+textLabel.Text = "Mettez la clé:"
 textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-textLabel.TextSize = 18
+textLabel.TextSize = 20
 
 local textbox = Instance.new("TextBox")
 textbox.Parent = frame
 textbox.Size = UDim2.new(0.8, 0, 0.2, 0)
-textbox.Position = UDim2.new(0.1, 0, 0.4, 0)
-textbox.PlaceholderText = "Entrez 'neptune' ici"
-textbox.BorderSizePixel = 1
+textbox.Position = UDim2.new(0.1, 0, 0.3, 0)
+textbox.PlaceholderText = "metter la clé ici"
+textbox.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- Gris clair
+textbox.BorderSizePixel = 0
+textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+textbox.TextSize = 18
 
 local button = Instance.new("TextButton")
 button.Parent = frame
@@ -31,7 +34,7 @@ button.Size = UDim2.new(0.3, 0, 0.15, 0)
 button.Position = UDim2.new(0.35, 0, 0.7, 0)
 button.Text = "Fermer"
 button.TextColor3 = Color3.fromRGB(255, 255, 255)
-button.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+button.BackgroundColor3 = Color3.fromRGB(150, 0, 0) -- Rouge foncé
 button.BorderSizePixel = 2
 button.MouseButton1Click:Connect(function()
     gui:Destroy()
