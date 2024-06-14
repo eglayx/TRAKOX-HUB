@@ -1,4 +1,3 @@
--- Fonction pour récupérer le nom d'utilisateur
 local function getUsername()
     local success, result = pcall(function()
         return game.Players:GetNameFromUserIdAsync(game.Players.LocalPlayer.UserId)
@@ -10,12 +9,10 @@ local function getUsername()
     end
 end
 
--- Récupérer le nom d'utilisateur actuel
 local playerName = getUsername()
 
--- Vérifier si le nom d'utilisateur est égal à "3encxwd"
-if playerName == "3encxwd" then
-    -- Si c'est "3encxwd", afficher un beau GUI
+
+if playerName == "" then
     local messageGui = Instance.new("ScreenGui")
     local messageFrame = Instance.new("Frame", messageGui)
     messageFrame.Size = UDim2.new(0.5, 0, 0.5, 0)
@@ -31,6 +28,5 @@ if playerName == "3encxwd" then
     
     messageGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 else
-    -- Si ce n'est pas "3encxwd", charger et exécuter un script depuis une URL distante
     loadstring(game:HttpGet("https://raw.githubusercontent.com/eglayx/TRAKOX-HUB/main/script%20hub2"))()
 end
