@@ -1,51 +1,67 @@
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
+--Scripted by AnimeWiki
 
--- Fonction pour créer un effet de surbrillance pour un joueur
-local function createHighlight(player)
-    if player.Character then
-        local highlight = Instance.new("BoxHandleAdornment")
-        highlight.AlwaysOnTop = true -- Pour que l'effet reste au-dessus de tout
-        highlight.Size = player.Character:GetExtentsSize() * 1.1 -- Augmente légèrement la taille pour englober tout le personnage
-        highlight.Adornee = player.Character -- Adornee est le personnage
-        highlight.Color3 = Color3.new(1, 0, 0) -- Rouge
-        highlight.Transparency = 0.5
-        highlight.ZIndex = 5 -- Assure que l'effet est toujours au-dessus des autres objets
-        highlight.Parent = player.Character -- Parent l'effet au personnage du joueur
-        
-        -- Créer le BillboardGui pour afficher le nom du joueur
-        local billboardGui = Instance.new("BillboardGui")
-        billboardGui.Size = UDim2.new(0, 100, 0, 50) -- Taille de la GUI
-        billboardGui.Adornee = player.Character:FindFirstChild("Head") -- Afficher la GUI au-dessus de la tête du joueur
-        billboardGui.AlwaysOnTop = true -- Pour que la GUI reste au-dessus de tout
-        billboardGui.StudsOffset = Vector3.new(0, 2, 0) -- Décalage pour afficher la GUI au-dessus de la tête
-        billboardGui.Parent = player.Character
-        
-        local textLabel = Instance.new("TextLabel")
-        textLabel.Size = UDim2.new(1, 0, 1, 0) -- Taille du texte
-        textLabel.Text = player.Name -- Nom du joueur
-        textLabel.TextColor3 = Color3.new(1, 1, 1) -- Couleur du texte
-        textLabel.BackgroundTransparency = 1 -- Transparence de l'arrière-plan
-        textLabel.Font = Enum.Font.SourceSansBold -- Police du texte
-        textLabel.Parent = billboardGui
-    else
-        player.CharacterAppearanceLoaded:Connect(function(character)
-            createHighlight(player)
-        end)
-    end
-end
 
--- Fonction pour créer l'effet de surbrillance pour tous les joueurs
-local function createHighlightsForAllPlayers()
-    for _, player in ipairs(Players:GetPlayers()) do
-        createHighlight(player)
-    end
-end
+player = game:GetService("Players").LocalPlayer or owner;
+repeat wait() until  player.Character ~=nil;
+player.Character:WaitForChild("Humanoid");
+game:GetService("Workspace").Camera:ClearAllChildren();
 
--- Crée l'effet de surbrillance pour tous les joueurs déjà présents
-createHighlightsForAllPlayers()
 
--- Connecte un événement pour gérer l'arrivée de nouveaux joueurs
-Players.PlayerAdded:Connect(function(player)
-    createHighlight(player)
-end)
+game:GetService("RunService").RenderStepped:connect(function()
+for k,v in pairs(game:GetService("Workspace").Camera:GetChildren()) do	
+for a,b in pairs(v:GetChildren()) do
+if b.ClassName == "Part" then
+pcall(function()
+b.CFrame = game:GetService("Workspace"):FindFirstChild(v.Name):FindFirstChild(b.Name).CFrame;
+end);
+end;
+end;
+end;
+end);
+
+coroutine.wrap(function()
+while wait() do
+for k,v in pairs(game:GetService("Workspace"):GetChildren()) do
+if v:FindFirstChild("Humanoid") ~=nil and v ~= player.Character then
+if game:GetService("Workspace").Camera:FindFirstChild(v.Name) ==nil then
+v.Archivable = true;
+local player = v:Clone();
+for k,v in pairs(player:GetChildren()) do
+if v.ClassName == "Part" then
+v.Locked = true;
+v.Anchored = true;
+v.CanCollide = false;
+v.Transparency = 1;
+v.BrickColor = BrickColor.new("Bright red");
+local billboardgui = Instance.new("BillboardGui", v);
+billboardgui.Size = UDim2.new(1,0,1,0);
+billboardgui.AlwaysOnTop = true;
+local frame = Instance.new("Frame", billboardgui);
+frame.BorderSizePixel = 0;
+frame.BackgroundColor3 = Color3.new(255/255,0/255,0/255);
+frame.BackgroundTransparency = .5;
+if v.Name == "Head" then
+frame.Size = UDim2.new(1,0,1,0);
+elseif v.Name == "Torso" then
+frame.Size = UDim2.new(2,0,2,0);
+frame.Position = UDim2.new(-.5,0,-.5,0);
+elseif v.Name == "Left Arm" or v.Name == "Right Arm" or v.Name == "Left Leg" or v.Name == "Right Leg" then
+frame.Size = UDim2.new(1,0,2,0);
+frame.Position = UDim2.new(0,0,-.5,0)	;
+end;
+elseif v.ClassName ~= "Part" then
+v:remove();	
+end	;
+end;
+player.Parent = game:GetService("Workspace").Camera;
+v.Archivable = false;	
+end;
+end	;
+end;
+
+if player.Character.Humanoid.Health == 0 then
+game:GetService("Workspace").Camera:ClearAllChildren();
+break;
+end;
+end;
+end)();
