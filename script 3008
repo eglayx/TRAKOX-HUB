@@ -1,0 +1,281 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Main = Instance.new("TextButton")
+local ButtonsPlan = Instance.new("Frame")
+local Medkits = Instance.new("TextButton")
+local Border = Instance.new("Frame")
+local Water = Instance.new("TextButton")
+local SpritdDonut = Instance.new("TextButton")
+local Employee = Instance.new("TextButton")
+local Pizza = Instance.new("TextButton")
+local Burger = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+ 
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ 
+Main.Name = "Main"
+Main.Parent = ScreenGui
+Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.411807567, 0, 0.463976949, 0)
+Main.Size = UDim2.new(0, 200, 0, 15)
+Main.Font = Enum.Font.Gotham
+Main.Text = "Dark ModMenu ESP"
+Main.TextColor3 = Color3.fromRGB(85, 0, 0)
+Main.TextSize = 18.000
+Main.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+Main.TextStrokeTransparency = 0.000
+Main.Active = true
+Main.Draggable = true
+ 
+ButtonsPlan.Name = "ButtonsPlan"
+ButtonsPlan.Parent = Main
+ButtonsPlan.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ButtonsPlan.BorderSizePixel = 0
+ButtonsPlan.Position = UDim2.new(0, 0, 1, 0)
+ButtonsPlan.Size = UDim2.new(0, 200, 0, 141)
+ 
+Medkits.Name = "Medkits"
+Medkits.Parent = Main
+Medkits.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Medkits.BackgroundTransparency = 0.750
+Medkits.BorderSizePixel = 0
+Medkits.Position = UDim2.new(0, 0, 1.06666672, 0)
+Medkits.Size = UDim2.new(0, 200, 0, 20)
+Medkits.Font = Enum.Font.Highway
+Medkits.Text = "Medkits Spawn"
+Medkits.TextColor3 = Color3.fromRGB(85, 0, 0)
+Medkits.TextSize = 24.000
+Medkits.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+Medkits.TextStrokeTransparency = 0.000
+Medkits.MouseButton1Down:connect(function()
+    for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+        if v.ClassName == 'BoolValue' and v.Parent.Name == 'Medkits' then -- checks if it has a handle and if its a touchtransmitter
+            local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+            local TextLabel = Instance.new('TextLabel') -- makes text label
+ 
+            BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+            BillboardGui.AlwaysOnTop = true -- if its on top or not
+            BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+            BillboardGui.StudsOffset = Vector3.new(0,2,0)
+            BillboardGui.MaxDistance = 350
+ 
+            TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+            TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
+            TextLabel.BackgroundTransparency = 1 -- transparency
+            TextLabel.Size = UDim2.new(0.25, 0.25, 0.25, 0.25) -- size
+            TextLabel.Text = "Medkits"-- what the label says
+            TextLabel.TextColor3 = Color3.new(255, 85, 0) -- color
+            TextLabel.TextScaled = true -- if the text is scaled or not
+        end
+    end
+    
+end)
+ 
+Border.Name = "Border"
+Border.Parent = Main
+Border.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Border.BorderSizePixel = 0
+Border.Position = UDim2.new(0, 0, 1, 0)
+Border.Size = UDim2.new(0, 200, 0, 1)
+ 
+Water.Name = "Water"
+Water.Parent = Main
+Water.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Water.BackgroundTransparency = 0.750
+Water.BorderSizePixel = 0
+Water.Position = UDim2.new(0, 0, 2.4000001, 0)
+Water.Size = UDim2.new(0, 200, 0, 20)
+Water.Font = Enum.Font.Highway
+Water.Text = "Water"
+Water.TextColor3 = Color3.fromRGB(85, 0, 0)
+Water.TextSize = 24.000
+Water.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+Water.TextStrokeTransparency = 0.000
+Water.MouseButton1Down:connect(function()
+    for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+        if v.ClassName == 'BoolValue' and v.Parent.Name == 'Water' then -- checks if it has a handle and if its a touchtransmitter
+            local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+            local TextLabel = Instance.new('TextLabel') -- makes text label
+ 
+            BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+            BillboardGui.AlwaysOnTop = true -- if its on top or not
+            BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+            BillboardGui.StudsOffset = Vector3.new(0,2,0)
+            BillboardGui.MaxDistance = 350
+ 
+            TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+            TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
+            TextLabel.BackgroundTransparency = 1 -- transparency
+            TextLabel.Size = UDim2.new(0.25, 0.25, 0.25, 0.25) -- size
+            TextLabel.Text = "Water"-- what the label says
+            TextLabel.TextColor3 = Color3.new(120, 249, 255) -- color
+            TextLabel.TextScaled = true -- if the text is scaled or not
+        end
+    end
+end)
+ 
+SpritdDonut.Name = "SpritdDonut"
+SpritdDonut.Parent = Main
+SpritdDonut.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+SpritdDonut.BackgroundTransparency = 0.750
+SpritdDonut.BorderSizePixel = 0
+SpritdDonut.Position = UDim2.new(0, 0, 3.73333359, 0)
+SpritdDonut.Size = UDim2.new(0, 200, 0, 20)
+SpritdDonut.Font = Enum.Font.Highway
+SpritdDonut.Text = "Sprited Donut"
+SpritdDonut.TextColor3 = Color3.fromRGB(85, 0, 0)
+SpritdDonut.TextSize = 24.000
+SpritdDonut.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+SpritdDonut.TextStrokeTransparency = 0.000
+SpritdDonut.MouseButton1Down:connect(function()
+    for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+        if v.ClassName == 'BoolValue' and v.Parent.Name == 'Striped Donut' then -- checks if it has a handle and if its a touchtransmitter
+            local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+            local TextLabel = Instance.new('TextLabel') -- makes text label
+ 
+            BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+            BillboardGui.AlwaysOnTop = true -- if its on top or not
+            BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+            BillboardGui.StudsOffset = Vector3.new(0,2,0)
+            BillboardGui.MaxDistance = 350
+ 
+            TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+            TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
+            TextLabel.BackgroundTransparency = 1 -- transparency
+            TextLabel.Size = UDim2.new(0.25, 0.25, 0.25, 0.25) -- size
+            TextLabel.Text = "Striped Donut"-- what the label says
+            TextLabel.TextColor3 = Color3.new(255, 255, 0) -- color
+            TextLabel.TextScaled = true -- if the text is scaled or not
+        end
+    end
+end)
+ 
+Employee.Name = "Employee"
+Employee.Parent = Main
+Employee.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Employee.BackgroundTransparency = 0.750
+Employee.BorderSizePixel = 0
+Employee.Position = UDim2.new(0, 0, 5.0666666, 0)
+Employee.Size = UDim2.new(0, 200, 0, 20)
+Employee.Font = Enum.Font.Highway
+Employee.Text = "Employee"
+Employee.TextColor3 = Color3.fromRGB(85, 0, 0)
+Employee.TextSize = 24.000
+Employee.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+Employee.TextStrokeTransparency = 0.000
+Employee.MouseButton1Down:connect(function()
+    repeat
+        wait(10)
+        for i,v in pairs(game.Workspace.GameObjects.Physical.Employees:GetDescendants()) do
+            if v.Name == 'BillboardGui' then
+                v:Destroy()
+            end
+        end
+        wait(0.1)
+        for i,v in pairs(game.Workspace.GameObjects.Physical.Employees:GetDescendants()) do
+            if v.Parent.Name == 'HumanoidRootPart' then
+                local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+                local TextLabel = Instance.new('TextLabel') -- makes text label
+ 
+                BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+                BillboardGui.AlwaysOnTop = true -- if its on top or not
+                BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+                BillboardGui.StudsOffset = Vector3.new(0,2,0)
+                BillboardGui.MaxDistance = 265
+ 
+                TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+                TextLabel.BackgroundTransparency = 1 -- transparency
+                TextLabel.Size = UDim2.new(1, 5, 1, 5) -- size
+                TextLabel.Text = v.Parent.Parent.Name -- what the label says
+                TextLabel.TextColor3 = Color3.new(1, 0, 0) -- color
+                TextLabel.TextScaled = false -- if the text is scaled or not
+            end
+        end
+    until game.Workspace.Camera.FieldOfView == 1
+end)
+ 
+Pizza.Name = "Pizza"
+Pizza.Parent = Main
+Pizza.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Pizza.BackgroundTransparency = 0.750
+Pizza.BorderSizePixel = 0
+Pizza.Position = UDim2.new(0, 0, 6.4000001, 0)
+Pizza.Size = UDim2.new(0, 200, 0, 20)
+Pizza.Font = Enum.Font.Highway
+Pizza.Text = "Pizza"
+Pizza.TextColor3 = Color3.fromRGB(85, 0, 0)
+Pizza.TextSize = 24.000
+Pizza.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+Pizza.TextStrokeTransparency = 0.000
+Pizza.MouseButton1Down:connect(function()
+    for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+        if v.ClassName == 'BoolValue' and v.Parent.Name == 'Pizza' then -- checks if it has a handle and if its a touchtransmitter
+            local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+            local TextLabel = Instance.new('TextLabel') -- makes text label
+ 
+            BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+            BillboardGui.AlwaysOnTop = true -- if its on top or not
+            BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+            BillboardGui.StudsOffset = Vector3.new(0,2,0)
+            BillboardGui.MaxDistance = 350
+ 
+            TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+            TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
+            TextLabel.BackgroundTransparency = 1 -- transparency
+            TextLabel.Size = UDim2.new(0.25, 0.25, 0.25, 0.25) -- size
+            TextLabel.Text = "Pizza"-- what the label says
+            TextLabel.TextColor3 = Color3.new(255, 170, 127) -- color
+            TextLabel.TextScaled = true -- if the text is scaled or not
+        end
+    end
+end)
+ 
+Burger.Name = "Burger"
+Burger.Parent = Main
+Burger.BackgroundColor3 = Color3.fromRGB(81, 81, 81)
+Burger.BackgroundTransparency = 0.750
+Burger.BorderSizePixel = 0
+Burger.Position = UDim2.new(0, 0, 7.73333311, 0)
+Burger.Size = UDim2.new(0, 200, 0, 20)
+Burger.Font = Enum.Font.Highway
+Burger.Text = "Burger"
+Burger.TextColor3 = Color3.fromRGB(85, 0, 0)
+Burger.TextSize = 24.000
+Burger.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+Burger.TextStrokeTransparency = 0.000
+Burger.MouseButton1Down:connect(function()
+    for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+        if v.ClassName == 'BoolValue' and v.Parent.Name == 'Burger' then -- checks if it has a handle and if its a touchtransmitter
+            local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+            local TextLabel = Instance.new('TextLabel') -- makes text label
+ 
+            BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+            BillboardGui.AlwaysOnTop = true -- if its on top or not
+            BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+            BillboardGui.StudsOffset = Vector3.new(0,2,0)
+            BillboardGui.MaxDistance = 350
+ 
+            TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+            TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
+            TextLabel.BackgroundTransparency = 1 -- transparency
+            TextLabel.Size = UDim2.new(0.25, 0.25, 0.25, 0.25) -- size
+            TextLabel.Text = "Burger"-- what the label says
+            TextLabel.TextColor3 = Color3.new(85, 0, 127) -- color
+            TextLabel.TextScaled = true -- if the text is scaled or not
+        end
+    end
+end)
+ 
+TextLabel.Parent = Main
+TextLabel.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+TextLabel.BackgroundTransparency = 0.750
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(-0.00100585935, 0, 9.00624371, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 20)
+TextLabel.Font = Enum.Font.Highway
+TextLabel.Text = "By RedShadowXVR (V2)"
+TextLabel.TextColor3 = Color3.fromRGB(85, 0, 0)
+TextLabel.TextSize = 19.000
+TextLabel.TextStrokeColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel.TextStrokeTransparency = 0.000
