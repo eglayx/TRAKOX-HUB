@@ -1,0 +1,27 @@
+    Name = "Teleport to players",
+    Default = false,
+    Callback = function(Value)
+		local teleporting = false
+        local players = {}
+        if Value then
+            teleporting = true
+            players = game:GetService("Players"):GetPlayers()
+            
+            spawn(function()
+                while teleporting and Value do
+                    for _, player in ipairs(players) do
+                        if player ~= game:GetService("Players").LocalPlayer then
+                            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+                        end
+                        
+                        wait(1)  -- Attendre 1 seconde entre chaque téléportation
+                    end
+                end
+            end)
+            
+            print("Toggle activé, début de la téléportation")
+        else
+            teleporting = false
+            print("Toggle désactivé, arrêt des actions")
+        end
+    end
